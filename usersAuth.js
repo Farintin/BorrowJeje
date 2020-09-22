@@ -6,15 +6,13 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const LocalStrategy = require('passport-local').Strategy;
 
-const { JWT_SECRET } =  require('./config');
 const User = require('./models/user.model');
-
 
 
 
 usersPassport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-    secretOrKey: JWT_SECRET
+    secretOrKey: process.env.JWT_SECRET
 }, async (payload, done) => {
     try {
         // Validate user token
