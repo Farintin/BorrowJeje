@@ -1,6 +1,6 @@
 # BorrowJeje API
 
-## https://borrowjeje.herokuapp.com/users/signup
+### https://borrowjeje.herokuapp.com/users/signup
 method: POST \
 request_body_schema:
 ```
@@ -9,7 +9,7 @@ request_body_schema:
       "pin": String
     }
 ```
-## https://borrowjeje.herokuapp.com/users/signin
+### https://borrowjeje.herokuapp.com/users/signin
 method: POST \
 request_body_schema:
 ```
@@ -19,11 +19,11 @@ request_body_schema:
     }
 ```
 
-## https://borrowjeje.herokuapp.com/users/user
+### https://borrowjeje.herokuapp.com/users/user
 method: GET \
 request_header_param: (key=authorization, value=`token`)
 
-## https://borrowjeje.herokuapp.com/users/user/details
+### https://borrowjeje.herokuapp.com/users/user/details
 method: GET \
 request_header_param: (key=authorization, value=`token`)
 
@@ -60,7 +60,7 @@ request_body_schema:
 
 
 
-## https://borrowjeje.herokuapp.com/superusers/signup
+### https://borrowjeje.herokuapp.com/superusers/signup
 method: POST \
 request_body_schema:
 ```
@@ -69,7 +69,7 @@ request_body_schema:
       "password": String
     }
 ```
-## https://borrowjeje.herokuapp.com/superusers/signin
+### https://borrowjeje.herokuapp.com/superusers/signin
 method: POST \
 request_body_schema:
 ```
@@ -79,6 +79,10 @@ request_body_schema:
     }
 ```
 
-## https://borrowjeje.herokuapp.com/superusers/superuser
+### https://borrowjeje.herokuapp.com/superusers/superuser
+method: GET \
+request_header_param: (key=authorization, value=`token`)
+
+### https://borrowjeje.herokuapp.com/superusers/superuser/users
 method: GET \
 request_header_param: (key=authorization, value=`token`)
