@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
-const mongoDB = process.env.DB_URL;
+let mongoDB;
+if (process.env.NODE_ENV !== 'production') {
+    mongoDB = 'mongodb://localhost:27017/borrowjeje'
+} else {
+    mongoDB = process.env.DB_URL
+};
 mongoose.connect(mongoDB, {useUnifiedTopology: true, useNewUrlParser: true , useCreateIndex: true});
 
 let db = mongoose.connection;

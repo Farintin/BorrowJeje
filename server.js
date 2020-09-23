@@ -1,10 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 
-
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
+    require('dotenv').config()
+};
 const db = require('./db');
 const User = require('./models/user.model');
 const superUser = require('./models/superuser.model');
