@@ -18,57 +18,69 @@ const userSchema = new Schema({
         minlength: 4,
         maxlength: 4
     },
-    details: {
-        firstName: {
-            type: String,
-            default: null,
-            trim: true
-        },
-        middleName: {
-            type: String,
-            default: null,
-            trim: true
-        },
-        lastName: {
-            type: String,
-            default: null,
-            trim: true
-        },
-        email: {
-            type: String,
-            lowercase: true,
-            default: null,
-            trim: true
-        },
-        gender: {
-            male: {
-                type: Boolean,
-                default: null
-            },
-            female: {
-                type: Boolean,
-                default: null
-            }
-        },
-        birthDate: {
-            type: Date,
+    detail: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Detail',
+        unique: true
+    }
+});
+const detailSchema = new Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        unique: true
+    },
+    firstName: {
+        type: String,
+        default: null,
+        trim: true
+    },
+    middleName: {
+        type: String,
+        default: null,
+        trim: true
+    },
+    lastName: {
+        type: String,
+        default: null,
+        trim: true
+    },
+    email: {
+        type: String,
+        lowercase: true,
+        default: null,
+        trim: true,
+        unique: true
+    },
+    gender: {
+        male: {
+            type: Boolean,
             default: null
         },
-        address: {
+        female: {
+            type: Boolean,
+            default: null
+        }
+    },
+    birthDate: {
+        type: Date,
+        default: null
+    },
+    address: {
+        type: String,
+        default: null,
+        trim: true
+    },
+    bvn: {
+        type: String,
+        default: null,
+        trim: true,
+        unique: true
+    },
+    employmentStatus: {
+        jobTitle: {
             type: String,
-            default: null,
-            trim: true
-        },
-        bvn: {
-            type: String,
-            default: null,
-            trim: true
-        },
-        employmentStatus: {
-            jobTitle: {
-                type: String,
-                default: null
-            }
+            default: null
         }
     }
 }, {
@@ -79,11 +91,7 @@ const userSchema = new Schema({
 userSchema.pre('save', async function(next) {
     try {
         const salt = await bcrypt.genSalt(10);
-        const pinHash = await bcrypt.hash(this.pin, salt)
-        //console.log('salt:', salt);
-        //console.log('normal pin:', this.pin);
-        //console.log('hashed pin:', pinHash);
-
+        const pinHash = await bcrypt.hash(this.pin, salt);
         this.pin = pinHash;
         next()
     } catch(err) {
@@ -101,6 +109,10 @@ userSchema.methods.isValidPin = async function (enteredPin) {
 
 
 const User = mongoose.model('User', userSchema);
+const Detail = mongoose.model('Detail', detailSchema);
 
 
-module.exports = User
+module.exports = {
+    User: User,
+    Detail: Detail
+}

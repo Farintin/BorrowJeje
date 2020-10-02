@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 };
 const db = require('./db');
-const User = require('./models/user.model');
+const { User, Detail } = require('./models/user.model');
 const superUser = require('./models/superuser.model');
 
 
